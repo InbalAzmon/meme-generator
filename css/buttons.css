@@ -1,0 +1,49 @@
+.tools-container .line-tools .btn-up {
+    box-shadow: 1px 5px 0 #048b97, inset 0 5px 0 rgba(255, 255, 255, 0.58);
+    background-color: #ebeef3;
+    background-image: linear-gradient(-38deg, #66c4dc 0%, #40b1ce 50%, #0c98bb 100%);
+}
+
+.tools-container .line-tools .btn-down {
+    box-shadow: 1px 5px 0 #048b97, inset 0 5px 0 rgba(255, 255, 255, 0.58);
+    background-color: #ebeef3;
+    background-image: linear-gradient(-38deg, #66c4dc 0%, #40b1ce 50%, #0c98bb 100%);
+}
+
+.tools-container .line-tools .btn-change-line {
+    box-shadow: 1px 5px 0 #048b97, inset 0 5px 0 rgba(255, 255, 255, 0.58);
+    background-color: #ebeef3;
+    background-image: linear-gradient(-38deg, #66c4dc 0%, #40b1ce 50%, #0c98bb 100%);
+}
+
+.tools-container .line-tools .btn-add-line {
+    box-shadow: 1px 5px 0 #015d33, inset 0 5px 0 rgba(255, 255, 255, 0.58);
+    background-color: #ebeef3;
+    background-image: linear-gradient(-38deg, #42eb5c 0%, #37b34a 100%);
+    text-shadow: 0px 3px #015d33;
+    font-size: 40px;
+    font-weight: bolder;
+    color: white;
+}
+
+.tools-container .line-tools .btn-remove-line {
+    box-shadow: 1px 5px 0 #8c0623, inset 0 5px 0 rgba(255, 255, 255, 0.58);
+    background-color: #ebeef3;
+    background-image: linear-gradient(-38deg, #5b1dcf 0%, #cf1d37 1%, #f05036 100%);
+}
+
+.tools-container .txt-tools .btn {
+    box-shadow: 1px 5px 0 rgba(92, 92, 92, 0.55), inset 0 5px 0 rgba(255, 255, 255, 0.58);
+    background-color: #ffffff;
+    background-color: #ffffff;
+}
+
+.tools-container .download-tools .btn-share {
+    box-shadow: 1px 6px 0 #165c9c, inset 0 5px 0 #57b2e8;
+    background-color: #1e7cd3;
+}
+
+.tools-container .download-tools .btn-download {
+    box-shadow: 1px 6px 0 #632687, inset 0 5px 0 #bf84da;
+    background-color: #8f44bb;
+}
