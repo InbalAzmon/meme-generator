@@ -3,8 +3,6 @@
     outline: none;
 }
 
-/* Basics */
-
 html {
     font-family: Arial, Helvetica, sans-serif, sans-serif;
     color: white;
@@ -24,7 +22,7 @@ a:active {
 button,
 .btn {
     cursor: pointer;
-    font-family: ptmono;
+    font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
     border: 0px;
 }
 
@@ -35,10 +33,10 @@ select {
 
 
 .general-container {
-    background-image: linear-gradient(lightblue, white);
-    background: url('img/groung.jpeg');
+    background: url('../img/ground.jpeg');
     background-repeat: no-repeat;
     background-size: auto;
+    margin: 0;
 }
 
 .screen-size {
@@ -49,14 +47,16 @@ select {
     height: fit-content;
     min-height: 100vh;
 }
-
-/* Nav-bar */
-
+.logo {
+    font-size: 50px;
+    font-family: monospace bold 20px/40px;
+    justify-self: center;
+}
 nav {
     padding: 5px 80px 20px 80px;
     display: flex;
     justify-content: space-between;
-    color: white;
+    color: rgb(56, 18, 18);
     font-size: 1.2rem;
 }
 
@@ -76,22 +76,14 @@ nav ul li a {
 }
 
 nav ul li.active {
-    background-color: #fefefe;
+    background-color: #e48787;
     color: black;
 }
 
-.logo {
-    width: 55px;
-    height: 55px;
-    display: inline-block;
-    cursor: pointer;
-}
 
 nav .btn-hamburger {
     display: none;
 }
-
-/* Main Gallery */
 
 .page-container.gallery-container {
     height: 100%;
@@ -106,12 +98,12 @@ nav .btn-hamburger {
     grid-column-gap: 10px;
     align-items: center;
     justify-content: center;
-    width: 1880px;
+    padding-left: 50px;
 }
 
 .img-gallery img {
-    width: 180px;
-    height: 180px;
+    width: 160px;
+    height: 160px;
     cursor: pointer;
 }
 
@@ -167,7 +159,7 @@ nav .btn-hamburger {
 }
 
 .memes-container .btns-container>* {
-    height: 30px;
+    height: 28px;
     margin: 5px;
     padding: 7px;
     display: flex;
@@ -184,4 +176,76 @@ nav .btn-hamburger {
 
 .memes-container .meme-img .btn-delete {
     background-color: #ebeef3;
+}
+
+@media (max-width: 950px) {
+    nav {
+        padding-left: 80px;
+        padding-right: 80px;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        color: white;
+        font-size: 1.2rem;
+    }
+    nav .btn-hamburger {
+        display: inline-block;
+        padding-bottom: 35px;
+        height: 25px;
+        cursor: pointer;
+        background-color: transparent;
+        color: white;
+        font-size: 2rem;
+        border: 0px;
+        z-index: 2;
+    }
+    nav .btn-hamburger img {
+        height: 25px;
+        z-index: 1;
+    }
+    nav ul {
+        position: fixed;
+        z-index: 1;
+        top: 0;
+        right: 0;
+        display: flex;
+        flex-direction: column;
+        height: 100vh;
+        background-color: #000000;
+        opacity: 0.9;
+        min-width: 50%;
+        transform: translateX(100%);
+        margin: 0;
+        padding: 70px 10px 20px 10px;
+        font-size: 1.2rem;
+        text-align: center;
+    }
+    nav ul.open-nav {
+        transition: 0.6s;
+        transform: translateX(0);
+    }
+    .general-container {
+        padding: 0px;
+    }
+    .general-container.screen-size {
+        height: auto;
+        min-height: 100vh;
+    }
+    .meme-editor-container .canvas-container {
+        margin: 10px auto;
+        max-width: fit-content;
+        max-height: 490px;
+    }
+}
+
+@media (max-width: 750px) {
+    html {
+        font-size: 15px;
+    }
+    .page-container {
+        width: 100vw;
+    }
+    .general-container {
+        padding: 0px;
+    }
 }

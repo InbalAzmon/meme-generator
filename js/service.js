@@ -1,18 +1,12 @@
 'use strict';
-
+const MEMES_KEY = 'memesDB';
 var gImgs;
 var gMeme;
 var gSavedMemes;
 
 function initMemesServices() {
     createImgs();
-
-}
-
-function changeLinePos(axis = 'y', num) {
-    const newPos = getFocusedLine().pos[axis] + num
-    if (newPos < 0 || newPos > gMeme.canvasSize) return;
-    getFocusedLine().pos[axis] = newPos;
+    setSavedMemes();
 }
 
 function changeFontFamily(font) {
@@ -23,9 +17,6 @@ function changeFontSize(num) {
     getFocusedLine().size += num;
 }
 
-function changeTxtAlign(align) {
-    getFocusedLine().textAlign = align;
-}
 
 function changeStrokeColor(color) {
     getFocusedLine().strokeColor = color;
@@ -33,6 +24,17 @@ function changeStrokeColor(color) {
 
 function changeFillColor(color) {
     getFocusedLine().fillColor = color;
+}
+
+function changeTxtAlign(align) {
+    getFocusedLine().textAlign = align;
+}
+
+
+function changeLinePos(axis = 'y', num) {
+    const newPos = getFocusedLine().pos[axis] + num;
+    if (newPos < 0 || newPos > gMeme.canvasSize) return;
+    getFocusedLine().pos[axis] = newPos;
 }
 
 function getLines() {
@@ -44,9 +46,13 @@ function changeFocusedLine(idx) {
     else gMeme.selectedLineIdx = (gMeme.selectedLineIdx < gMeme.lines.length - 1) ? gMeme.selectedLineIdx + 1 : 0
 }
 
+function getFocusedLine() {
+    return gMeme.lines[gMeme.selectedLineIdx];
+}
+
 function addLine() {
     if (gMeme.lines[gMeme.selectedLineIdx].txt === '')
-        return;
+    return;
     _createLine();
     changeFocusedLine();
     if (gMeme.selectedLineIdx < 2) {
@@ -61,9 +67,6 @@ function removeLine() {
     changeFocusedLine();
 }
 
-function getFocusedLine() {
-    return gMeme.lines[gMeme.selectedLineIdx];
-}
 
 function addTxt(txt) {
     gMeme.lines[gMeme.selectedLineIdx].txt = txt;
@@ -128,109 +131,55 @@ function _createImg(id) {
     return img;
 }
 
-//BEFORE MAKE BALAGAN
-// function initMemesServices(){
-//     createImgs(); //V
-//     // setSavedMemes(); //todo
-// }
 
-// function getImgs(){
-//     return gImgs;
-// }
+function setSavedMemes(){
+    var memes = loadFromStorage(MEMES_KEY);
+    if (!memes || memes.length === 0){
+        memes = [];
+    }
+    gSavedMemes = memes;
+}
 
-// function changeFillColor(color) {
-//     getFocusedLine().fillColor = color;
-// }
+function saveMeme(memeImg){
+    const memeIdx = getMemeIdById(gMeme.id);
+    if (memeIdx >= 0) gSavedMemes.splice(memeIdx, 1);
+    gSavedMemes.push(gMeme);
+    gMeme.memeImg = memeImg;
+    saveToStorage(MEMES_KEY, gSavedMemes);
+    setSavedMemes();
+}
 
+function getSavedMemes(){
+    return gSavedMemes;
+}
 
-// function getLines() {
-//     return gMeme.lines;
-// }
+function removeMeme(memeId){
+    const memeIdx = getMemeIdById(gMeme.id);
+    if (memeIdx >= 0){
+        if (confirm('Do you want to remove this Meme??')) gSavedMemes.splice(memeIdx, 1);
+        saveToStorage(MEMES_KEY, gSavedMemes);
+    }
+}
+function setMemeId(memeId){
+    const memeIdx = getMemeIdById(memeId);
+    if (memeIdx >= 0){
+        gMeme = gSavedMemes[memeIdx];
+    }
+}
 
-// function createImgs(){
-//     const imgs = [];
-//     for (let i = 0; i < 18; i++) {
-//         const img = _createImg(i + 1);
-//         imgs.push(img);
-//     }
-//     gImgs = imgs;
-// }
+function getMemeIdxById(memeId) {
+    const memeIdx = gSavedMemes.findIndex(function(meme) {
+        return (meme.id === memeId)
+    })
+    return memeIdx
+}
 
-// function _createImg(id){
-//     const img = {
-//         id,
-//         url: `./meme-img/${id}.jpg`,
-//         keywords: []
-//     }
-//     return img;
-// }
+function makeId(length = 5) {
+    var txt = '';
+    var possible = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
+    for (var i = 0; i < length; i++) {
+        txt += possible.charAt(Math.floor(Math.random() * possible.length));
+    }
+    return txt;
+}
 
-// function changeFocusedLine(idx) {
-//     if (idx) gMeme.selectedLineIdx = idx;
-//     else gMeme.selectedLineIdx = (gMeme.selectedLineIdx < gMeme.lines.length - 1) ? gMeme.selectedLineIdx + 1 : 0
-// }
-
-// function getFocusedLine() {
-//     return gMeme.lines[gMeme.selectedLineIdx];
-// }
-
-
-// function addLine(){
-//     if (gMeme.lines[gMeme.selectedLineIdx].txt === '') return;
-//     _createLine(); //V
-//     changeFocusedLine(); //V
-//     if (gMeme.selectedLineIdx < 2) {
-//         gMeme.lines[gMeme.selectedLineIdx].pos.y = gMeme.cancasSize - gMeme.lines[gMeme.selectedLineIdx].size / 2;
-//         return;
-//     }
-//     gMeme.lines[gMeme.selectedLineIdx].pos.y = gMeme.cancasSize / 2;
-// }
-
-// function createMeme(canvasSize = 500, selectedImgId = 1){
-//     const meme = {
-//         id: makeId(),
-//         memeImg: '',
-//         canvasSize,
-//         selectedImgId,
-//         selectedLineIdx: 0,
-//         lines: []
-//     }
-//     gMeme = meme;
-//     _createLine();
-// }
-// function _createLine(){ 
-//     const line = {
-//         txt: '',
-//         size: gMeme.canvasSize * 0.15, 
-//         family: 'Impact', 
-//         textAlign: 'center',
-//         lineWidth: gMeme.canvasSize * 0.008,
-//         strokeColor: 'block',
-//         fillColor: 'white',
-//         pos: {
-//             x: gMeme.canvasSize / 2,
-//             y: gMeme.canvasSize / 0.15,
-//         }
-//     }
-//     gMeme.lines.push(line);
-// }
-
-// function changeLinePos(axis = 'y', num) {
-//     const newPos = getFocusedLine().pos[axis] + num
-//     if (newPos < 0 || newPos > gMeme.canvasSize) return;
-//     getFocusedLine().pos[axis] = newPos;
-// }
-
-// function getCurrImg(){
-//     var img = gImgs.find(function(img) {
-//         return (img.id === gMeme.selectedImgId);
-//     })
-//     return img;
-// }
-
-// function getMemeIdById(memeId){
-//     const memeIdx = gSavedMemes.findIndex(function(meme) {
-//         return (meme.id === memeId);
-//     })
-//     return memeIdx;
-// }

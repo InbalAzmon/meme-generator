@@ -15,22 +15,20 @@
     <div class="general-container content-size">
 
         <nav>
-            <img src="./imgs/logo.svg" alt="logo" class="logo" onclick="changeContainers('gallery-container')">
+            <div alt="logo" class="logo" onclick="hideContainerExcept('gallery-container')">MemeZmon</div>
             <ul nav>
                 <li class="go-to-gallery-container active">
-                    <a onclick="changeContainers('gallery-container')">The Gallery</a>
+                    <a onclick="hideContainerExcept('gallery-container')">The Gallery</a>
                 </li>
                 <li class="go-to-memes-container">
-                    <!-- Here goes saved memes -->
-                    <a onclick="changeContainers('memes-container')">My Saved Memes</a>
+                    <a onclick="hideContainerExcept('memes-container')">My Saved Memes</a>
                 </li>
                 <li class="go-to-about-container">
-                    <a onclick="changeContainers('about-container')">About Us</a>
+                    <a onclick="hideContainerExcept('about-container')">About Us</a>
                 </li>
             </ul>
             <button class="btn btn-hamburger" onclick="toggleNav()">
-                <img src="./imgs/Hamburger.png" alt="">
-                <img class="hide" src="./imgs/close.png" alt="">
+               
             </button>
         </nav>
 
@@ -43,32 +41,32 @@
                 <div class="tools-container">
                     <input onkeyup="onAddTxt()" name="txt-input" type="text" placeholder="Enter your text here!">
                     <div class="line-tools">
-                        <button class="btn btn-up" onclick="onChangeLinePos(-2)" title="Line up"></button>
-                        <button class="btn btn-down" onclick="onChangeLinePos(2)" title="Line down"></button>
-                        <button class="btn btn-change-line" onclick="onChangeFocusedLine()" title="Select-line"><img src="./imgs/down.svg" alt=""></button>
+                        <button class="btn btn-up" onclick="onChangeLinePos(-2)" alt="">UP</button>
+                        <button class="btn btn-down" onclick="onChangeLinePos(2)" alt="">DOWN</button>
+                        <button class="btn btn-change-line" onclick="onChangeFocusedLine()" alt="">Select</button>
                         <button class="btn btn-add-line" onclick="onAddLine()" alt="">+</button>
                         <button class="btn btn-remove-line" onclick="onRemoveLine()" alt="">-</button>
                     </div>
                     <div class="txt-tools">
-                        <button class="btn font-up" title="Increase font"><img alt=""></button>
-                        <button class="btn font-down" title="Decrease font"><img alt=""></button>
-                        <button class="btn align-left" title="Align text left"><img alt=""></button>
-                        <button class="btn align-center" title="Center text"><img alt=""></button>
-                        <button class="btn align-right" title="Align text right"><img alt=""></button>
+                        <button class="btn font-up" onclick="onChangeFontSize(2)" ><img alt=""><img src="./icons/increase-font-icon.png" alt=""></button>
+                        <button class="btn font-down" onclick="onChangeFontSize(-2)" ><img src="./icons/decrease-font-icon.png" alt=""></button>
+                        <button class="btn align-left" onclick="onChangeTxtAlign('end')" ><img src="./icons/align-to-left.png" alt=""></button>
+                        <button class="btn align-center" onclick="onChangeTxtAlign('center')" ><img src="./icons/center-text-alignment.png" alt=""></button>
+                        <button class="btn align-right" onclick="onChangeTxtAlign('start')" ><img src="./icons/align-to-right.png" alt=""></button>
                         <select class="btn-select" id="select-font">
                             <option value="Impact">Impact</option>
                             <option value="monospace">Monospace</option>
-                            <option value="Garamond">Garamond</option>
+                            <option value="Garamond">Courier</option>
                             <option value="Ariel">Ariel</option>
-                            <option value="Courier New">Courier New</option>
+                            <option value="Courier New">Garamond</option>
                             <option value="sans-serif">sans-serif</option>
                             <option value="serif">serif</option>
                         </select>
-                        <label class="btn btn-stroke-color" for="stroke-color-input"><img alt=""
+                        <label class="btn btn-stroke-color" for="stroke-color-input"><img src="./icons/paint-board-and-brush.png" alt=""
                                 title="Change text stroke"></label>
                         <input onchange="onChangeStrokeColor(this)" type="color" id="stroke-color-input"
                             name="stroke-color-input" hidden>
-                        <label class="btn btn-fill-color" for="fill-color-input"><img alt=""
+                        <label class="btn btn-fill-color" for="fill-color-input"><img src="./icons/paint-board-and-brush.png" alt=""
                                 title="Change text color"></label>
                         <input onchange="onChangeFillColor(this)" type="color" id="fill-color-input"
                             name="fill-color-input" hidden>
@@ -76,7 +74,7 @@
                     <div class="download-tools">
                         <form action="" method="POST" onsubmit="uploadImg(this, event)" enctype="multipart/form-data" onload="uploadImg(this, event)">
                         <input name="img" id="imgData" type="hidden"/>
-                        <button type="submit" class="btn btn-share"><img *pic of share* alt="">Share</button>
+                        <button type="submit" class="btn btn-share"><img src="./icons/facebook-logo.png" alt="">Share</button>
                         <a href='#' class="btn btn-download" onclick="downloadCanvas(this)" alt="">Download</a>
                         </form>
                         <button class="btn btn-save">Save</button>
@@ -103,9 +101,6 @@
         
     </div>
     
-   
-
-
     <script src="js/storage-service.js"></script>
     <script src="js/service.js"></script>
     <script src="js/controller.js"></script>

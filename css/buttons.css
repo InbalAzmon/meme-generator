@@ -47,3 +47,9 @@
     box-shadow: 1px 6px 0 #632687, inset 0 5px 0 #bf84da;
     background-color: #8f44bb;
 }
+
+@media (max-width: 950px) {
+    .tools-container>*>*::before {
+        font-size: x-small;
+    }
+}
